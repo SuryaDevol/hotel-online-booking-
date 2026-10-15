@@ -5,12 +5,14 @@ import { Provider } from 'react-redux';
 import { HelmetProvider } from 'react-helmet-async';
 import { configureStore } from '@reduxjs/toolkit';
 import hotelsReducer from './features/hotels/hotelsSlice';
+import bookingsReducer from './features/bookings/bookingsSlice';
 import App from './App';
 
 function renderAppWithStore() {
   const store = configureStore({
     reducer: {
       hotels: hotelsReducer,
+      bookings: bookingsReducer,
     },
   });
 

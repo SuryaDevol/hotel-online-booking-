@@ -1,9 +1,10 @@
 import React from 'react';
-import { Search, X, SlidersHorizontal, LayoutGrid, Table, ArrowUpDown } from 'lucide-react';
+import { Search, X, LayoutGrid, Table, ArrowUpDown, Heart, Compass } from 'lucide-react';
 
 /**
  * SearchAndFilters Component
- * Houses the search bar, location dropdown, sort selector, layout switch, and items per page selector.
+ * Houses the search bar, GPS near me button, location dropdown, sort selector,
+ * favorites filter toggle, layout switch, and items per page selector.
  */
 export default function SearchAndFilters({
   searchQuery,
@@ -19,19 +20,27 @@ export default function SearchAndFilters({
   onViewModeChange,
   onResetFilters,
   totalResults,
+  favoritesOnly = false,
+  onToggleFavoritesOnly,
+  userLocation = null,
+  onDetectUserLocation,
 }) {
-  const isFiltered = searchQuery.trim() !== '' || selectedLocation !== 'all' || sortBy !== 'default';
+  const isFiltered =
+    searchQuery.trim() !== '' ||
+    selectedLocation !== 'all' ||
+    sortBy !== 'default' ||
+    favoritesOnly;
 
   return (
     <div className="filters-container">
-      {/* Search Input Bar */}
+      {/* Search Input Bar Row */}
       <div className="search-bar-row">
         <div className="search-input-wrapper">
           <Search className="search-input-icon" size={18} />
           <input
             type="text"
             className="search-input"
-            placeholder="Search hotels by name or location (e.g., Paris, Tokyo, Grand)..."
+            placeholder="Search hotels by name or location (e.g., Mumbai, Paris, Taj)..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             aria-label="Search hotels by name or location"
@@ -47,6 +56,28 @@ export default function SearchAndFilters({
             </button>
           )}
         </div>
+
+        {/* GPS Locate Me Button */}
+        <button
+          type="button"
+          className={`btn btn-secondary btn-locate-me ${userLocation ? 'location-active' : ''}`}
+          onClick={onDetectUserLocation}
+          title={userLocation ? 'Your GPS location is active' : 'Detect my location to see distances'}
+        >
+          <Compass size={16} className={userLocation ? 'icon-spin-subtle' : ''} />
+          <span className="btn-text">{userLocation ? 'Location Active' : 'Near Me'}</span>
+        </button>
+
+        {/* Favorites Quick Filter */}
+        <button
+          type="button"
+          className={`btn btn-secondary btn-fav-filter ${favoritesOnly ? 'active' : ''}`}
+          onClick={onToggleFavoritesOnly}
+          title="Filter Wishlist / Favorited hotels"
+        >
+          <Heart size={16} fill={favoritesOnly ? 'currentColor' : 'none'} />
+          <span className="btn-text">Favorites</span>
+        </button>
 
         {/* View Mode Toggle: Grid Cards vs Table View */}
         <div className="view-mode-toggle" role="group" aria-label="Layout View Toggle">
@@ -105,6 +136,9 @@ export default function SearchAndFilters({
             onChange={(e) => onSortChange(e.target.value)}
           >
             <option value="default">Default Order</option>
+            {userLocation && (
+              <option value="distance-asc">Nearest First (Live Distance 📍)</option>
+            )}
             <option value="price-asc">Price: Low to High (₹ &rarr; ₹₹₹)</option>
             <option value="price-desc">Price: High to Low (₹₹₹ &rarr; ₹)</option>
             <option value="name-asc">Hotel Name: A &rarr; Z</option>
@@ -142,7 +176,9 @@ export default function SearchAndFilters({
         )}
 
         <div className="results-count-badge">
-          <span>{totalResults} {totalResults === 1 ? 'property' : 'properties'} found</span>
+          <span>
+            {totalResults} {totalResults === 1 ? 'property' : 'properties'} found
+          </span>
         </div>
       </div>
     </div>

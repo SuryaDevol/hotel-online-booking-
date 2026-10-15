@@ -83,10 +83,21 @@ export const hotelsSlice = createSlice({
     resetToInitialHotels: (state) => {
       state.items = initialHotels;
     },
+
+    /**
+     * Toggle wishlist / favorite status for a hotel
+     */
+    toggleFavorite: (state, action) => {
+      const targetId = action.payload;
+      const hotel = state.items.find((h) => h.id === targetId);
+      if (hotel) {
+        hotel.isFavorite = !hotel.isFavorite;
+      }
+    },
   },
 });
 
-export const { addHotel, updateHotel, deleteHotel, resetToInitialHotels } = hotelsSlice.actions;
+export const { addHotel, updateHotel, deleteHotel, resetToInitialHotels, toggleFavorite } = hotelsSlice.actions;
 
 // Selectors
 export const selectAllHotels = (state) => state.hotels.items;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Star, Edit3, Trash2, Globe, ImageOff } from 'lucide-react';
+import { MapPin, Star, Edit3, Trash2, Globe, ImageOff, CreditCard, Heart } from 'lucide-react';
 
 /**
  * Table Thumbnail helper to catch image errors gracefully
@@ -28,15 +28,16 @@ function TableThumbnail({ src, alt }) {
 
 /**
  * HotelTable Component
- * Renders hotel records in an administrative tabular layout with Indian Rupee (₹ INR) formatting
- * and smooth row entry animations.
+ * Renders hotel records in an administrative tabular layout with Indian Rupee (₹ INR) formatting,
+ * direct Book Now CTA, and favorites toggle.
  */
-export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
+export default function HotelTable({ hotels, onEdit, onDelete, onViewMap, onBook, onToggleFavorite }) {
   return (
     <div className="table-responsive-wrapper animated-fade">
       <table className="hotel-data-table">
         <thead>
           <tr>
+            <th scope="col" style={{ width: '40px' }}>Fav</th>
             <th scope="col" style={{ width: '60px' }}>Preview</th>
             <th scope="col">Hotel Name</th>
             <th scope="col">Location</th>
@@ -60,6 +61,17 @@ export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
                 className="table-row animated-row"
                 style={{ animationDelay: `${index * 45}ms` }}
               >
+                <td>
+                  <button
+                    type="button"
+                    className={`btn-icon-table-fav ${hotel.isFavorite ? 'favorited' : ''}`}
+                    onClick={() => onToggleFavorite && onToggleFavorite(hotel.id)}
+                    title={hotel.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                    aria-label={`Favorite ${hotel.name}`}
+                  >
+                    <Heart size={14} fill={hotel.isFavorite ? 'currentColor' : 'none'} />
+                  </button>
+                </td>
                 <td>
                   <TableThumbnail src={hotel.image} alt={hotel.name} />
                 </td>
@@ -109,6 +121,14 @@ export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
                 </td>
                 <td>
                   <div className="table-actions-cell">
+                    <button
+                      type="button"
+                      className="btn btn-sm btn-primary table-btn-book"
+                      onClick={() => onBook && onBook(hotel)}
+                      title={`Book ${hotel.name}`}
+                    >
+                      <CreditCard size={13} /> Book
+                    </button>
                     {hasCoordinates && (
                       <button
                         type="button"

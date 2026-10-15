@@ -12,11 +12,14 @@ export default function HotelList({
   totalMatching,
   totalInStore,
   viewMode,
+  distancesMap = {},
   onEdit,
   onDelete,
   onViewMap,
   onResetFilters,
   onOpenAddModal,
+  onBook,
+  onToggleFavorite,
 }) {
   // Empty state handling
   if (totalMatching === 0) {
@@ -74,9 +77,12 @@ export default function HotelList({
               key={hotel.id}
               hotel={hotel}
               index={index}
+              distanceKm={distancesMap[hotel.id] !== undefined ? distancesMap[hotel.id] : null}
               onEdit={onEdit}
               onDelete={onDelete}
               onViewMap={onViewMap}
+              onBook={onBook}
+              onToggleFavorite={onToggleFavorite}
             />
           ))}
         </div>
@@ -86,6 +92,8 @@ export default function HotelList({
           onEdit={onEdit}
           onDelete={onDelete}
           onViewMap={onViewMap}
+          onBook={onBook}
+          onToggleFavorite={onToggleFavorite}
         />
       )}
     </section>

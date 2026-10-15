@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { X, MapPin, Globe, ExternalLink } from 'lucide-react';
+import { X, MapPin, Globe, ExternalLink, Navigation, Compass } from 'lucide-react';
+import { calculateDistanceKm, formatDistance } from '../utils/geo';
 
 /**
  * HotelMapModal Component
- * Visualizes the geographic coordinates of a hotel on OpenStreetMap.
- * Uses an interactive OpenStreetMap frame with marker coordinates and direct map link.
+ * Visualizes geographic coordinates of a hotel on OpenStreetMap.
+ * Features live user GPS distance calculation, Turn-by-Turn navigation link, and map embedding.
  */
-export default function HotelMapModal({ isOpen, onClose, hotel }) {
+export default function HotelMapModal({ isOpen, onClose, hotel, userLocation, onDetectUserLocation }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -23,6 +24,12 @@ export default function HotelMapModal({ isOpen, onClose, hotel }) {
   const lng = hotel.longitude;
   const hasCoords = lat !== null && lat !== undefined && lng !== null && lng !== undefined;
 
+  // Calculate distance if user location is available
+  const distanceKm =
+    hasCoords && userLocation
+      ? calculateDistanceKm(userLocation.latitude, userLocation.longitude, lat, lng)
+      : null;
+
   // OpenStreetMap embed URL with bounding box around coordinates
   const delta = 0.03;
   const bbox = hasCoords
@@ -34,6 +41,10 @@ export default function HotelMapModal({ isOpen, onClose, hotel }) {
 
   const osmExternalUrl = hasCoords
     ? `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=14/${lat}/${lng}`
+    : '#';
+
+  const directionsUrl = hasCoords
+    ? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
     : '#';
 
   return (
@@ -49,15 +60,20 @@ export default function HotelMapModal({ isOpen, onClose, hotel }) {
         <div className="modal-header">
           <div>
             <h2 id="map-modal-title" className="modal-title">
-              {hotel.name} — Location Map
+              {hotel.name} — Interactive Location Map
             </h2>
             <div className="modal-map-meta">
               <span className="map-meta-item">
-                <MapPin size={14} /> {hotel.location}
+                <MapPin size={14} className="text-primary" /> {hotel.location}
               </span>
               {hasCoords && (
                 <span className="map-meta-item">
                   <Globe size={14} /> Lat: {lat.toFixed(4)}, Lng: {lng.toFixed(4)}
+                </span>
+              )}
+              {distanceKm !== null && (
+                <span className="map-meta-item map-distance-highlight">
+                  <Compass size={14} /> {formatDistance(distanceKm)} from your location
                 </span>
               )}
             </div>
@@ -80,20 +96,32 @@ export default function HotelMapModal({ isOpen, onClose, hotel }) {
                 title={`Map of ${hotel.name}`}
                 width="100%"
                 height="420"
-                style={{ border: 0, borderRadius: '8px' }}
+                style={{ border: 0, borderRadius: '12px' }}
                 src={osmEmbedUrl}
                 loading="lazy"
               />
               <div className="osm-attribution-bar">
-                <span>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors</span>
-                <a
-                  href={osmExternalUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="osm-external-link"
-                >
-                  Open in OpenStreetMap <ExternalLink size={13} />
-                </a>
+                <div className="osm-links-left">
+                  <span>Map data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors</span>
+                </div>
+                <div className="osm-links-right">
+                  <a
+                    href={directionsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-sm btn-secondary directions-btn"
+                  >
+                    <Navigation size={13} /> Get Turn-by-Turn Directions
+                  </a>
+                  <a
+                    href={osmExternalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="osm-external-link"
+                  >
+                    Open in Full Map <ExternalLink size={13} />
+                  </a>
+                </div>
               </div>
             </div>
           ) : (
@@ -107,9 +135,18 @@ export default function HotelMapModal({ isOpen, onClose, hotel }) {
 
         {/* Modal Footer */}
         <div className="modal-footer">
+          {!userLocation && onDetectUserLocation && (
+            <button
+              type="button"
+              className="btn btn-secondary mr-auto"
+              onClick={onDetectUserLocation}
+            >
+              <Compass size={15} /> Find Distance from My Location
+            </button>
+          )}
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-primary"
             onClick={onClose}
           >
             Close Map

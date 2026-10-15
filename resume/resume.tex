@@ -1,0 +1,169 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.1cm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{tikz}
+
+% Define Black & White Theme Colors
+\definecolor{primaryblack}{RGB}{0, 0, 0}
+\definecolor{darkgray}{RGB}{31, 41, 55}
+\definecolor{linegray}{RGB}{75, 85, 99}
+\definecolor{textdark}{RGB}{17, 24, 39}
+
+% Hyperlink Setup (Monochrome)
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primaryblack,
+    urlcolor=primaryblack
+}
+
+% Remove default page numbers
+\pagestyle{empty}
+
+% Compact list settings
+\setlist[itemize]{leftmargin=1.1em, itemsep=1.5pt, topsep=1pt, parsep=0pt}
+
+% Outer frame
+\usepackage{mdframed}
+\mdfdefinestyle{resumebox}{
+    linecolor=primaryblack,
+    linewidth=1.5pt,
+    roundcorner=4pt,
+    innertopmargin=8pt,
+    innerbottommargin=8pt,
+    innerleftmargin=10pt,
+    innerrightmargin=10pt
+}
+
+\begin{document}
+\begin{mdframed}[style=resumebox]
+
+% HEADER
+\begin{center}
+    {\fontsize{19}{22}\selectfont \textbf{\color{primaryblack} JEYASURYA G}}\\[2pt]
+    {\fontsize{9.5}{11}\selectfont \textbf{\color{darkgray} COMPUTER SCIENCE ENGINEERING STUDENT}}\\[3pt]
+    \textcolor{primaryblack}{\rule{\textwidth}{1.2pt}}\\[3pt]
+    \small
+    \href{mailto:suryacloudcamp@gmail.com}{suryacloudcamp@gmail.com} \ $\vert$ \ +91 6379491821\\
+    \href{https://github.com/SuryaDevod}{github.com/SuryaDevod} \ $\vert$ \ \href{https://linkedin.com/in/jeyasurya-g}{linkedin.com/in/jeyasurya-g}\\[3pt]
+    \textcolor{primaryblack}{\rule{\textwidth}{1.2pt}}
+\end{center}
+
+\vspace{-6pt}
+
+\begin{tabularx}{\textwidth}{@{} p{0.32\textwidth} | p{0.65\textwidth} @{}}
+% LEFT COLUMN
+\begin{minipage}[t]{\linewidth}
+    \textbf{\color{primaryblack}\large EDUCATION}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \textbf{Jai Shriram Engg. College}\\
+    \textit{B.E. Computer Science}\\
+    CGPA: \textbf{7.86 / 10}\\
+    Graduation: \textbf{2027}\\
+    \vspace{3pt}\dotfill\vspace{3pt}
+    \textbf{SDA Matric. Hr. Sec. School}\\
+    HSC (XII): \textbf{80\%} (2023)\\
+    SSLC (X): \textbf{Completed} (2021)
+
+    \vspace{8pt}
+    \textbf{\color{primaryblack}\large TECHNICAL SKILLS}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \textbf{Languages:}\\
+    Python, Java, JavaScript, SQL\\[3pt]
+    \textbf{Frontend \& Web:}\\
+    React.js, Redux Toolkit, HTML5, CSS3, REST\\[3pt]
+    \textbf{AI \& Computer Vision:}\\
+    OpenCV, YOLOv8, Image Processing\\[3pt]
+    \textbf{Databases:}\\
+    MySQL, Relational Databases (RDBMS)\\[3pt]
+    \textbf{Tools \& Testing:}\\
+    Git, GitHub, VS Code, Vitest, Postman\\[3pt]
+    \textbf{Core Concepts:}\\
+    Data Structures \& Algorithms (DSA), OOP
+
+    \vspace{8pt}
+    \textbf{\color{primaryblack}\large CERTIFICATIONS}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \begin{itemize}
+        \item Python Programming Training -- Brainery Spot
+        \item Flutter UI Development -- Atalya Solutions
+        \item AI Fundamentals Certification
+        \item Database \& SQL Fundamentals
+    \end{itemize}
+
+    \vspace{8pt}
+    \textbf{\color{primaryblack}\large ACHIEVEMENTS}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \begin{itemize}
+        \item \textbf{1st Place Winner} -- NOVA 2K25 Project Expo (Among 50+ college teams).
+        \item \textbf{Best Project Award} -- Guardian Union: \textit{"Detect the Unseen"}.
+        \item \textbf{Faculty Innovation Recognition} -- Commended for software innovation.
+    \end{itemize}
+\end{minipage}
+&
+% RIGHT COLUMN
+\begin{minipage}[t]{\linewidth}
+    \textbf{\color{primaryblack}\large PROFESSIONAL SUMMARY}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \small
+    Computer Science Engineering student (Batch of 2027) skilled in \textbf{Java, Python, React.js, and SQL}. Passionate about building full-stack web applications, secure database systems, and practical computer vision models.
+
+    \vspace{6pt}
+    \textbf{\color{primaryblack}\large PROJECTS}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \textbf{1. ShieldBank -- Secure Banking System} \hfill \textit{\footnotesize (Java, MySQL)}\\
+    \begin{itemize}
+        \item Developed a desktop banking app with secure user login, account management, and real-time fund transfers.
+        \item Implemented \textbf{AES data encryption} and \textbf{ACID SQL transactions} to safeguard credentials and ensure accurate transfers.
+    \end{itemize}
+    \vspace{2pt}\dotfill\vspace{2pt}
+
+    \textbf{2. GrandStay -- Hotel Analytics Dashboard} \hfill \textit{\footnotesize (React.js, Redux, Vite)}\\
+    \begin{itemize}
+        \item Built a responsive web dashboard for hotel management featuring live search, multi-criteria filtering by city/price, and pagination.
+        \item Integrated interactive \textbf{Leaflet OpenStreetMap} for property location tracking and automated unit testing with \textbf{Vitest}.
+    \end{itemize}
+    \vspace{2pt}\dotfill\vspace{2pt}
+
+    \textbf{3. Object Detection -- Surveillance System} \hfill \textit{\footnotesize (Python, YOLOv8, OpenCV)}\\
+    \begin{itemize}
+        \item Engineered an AI surveillance system with \textbf{YOLOv8 \& OpenCV} to detect unauthorized electronic devices (phones, earphones).
+        \item Optimized video streaming to achieve \textbf{30+ FPS real-time processing}, winning \textbf{1st Place at the NOVA 2K25 Project Expo}.
+    \end{itemize}
+    \vspace{2pt}\dotfill\vspace{2pt}
+
+    \textbf{4. LegalScanAI -- Defect Reporting \& Audit} \hfill \textit{\footnotesize (Python, OpenCV)}\\
+    \begin{itemize}
+        \item Developed an inspection tool analyzing product images to detect manufacturing cracks, defects, and packaging issues.
+        \item Implemented automated PDF report generation and secure email notification to route verified grievance reports to authorities.
+    \end{itemize}
+
+    \vspace{6pt}
+    \textbf{\color{primaryblack}\large INTERNSHIPS \& TRAINING}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \textbf{1. Brainery Spot Technology} \hfill \textit{\footnotesize Python Developer Intern}\\
+    \begin{itemize}
+        \item Developed modular Python data automation scripts and solved 50+ DSA algorithmic programming benchmarks.
+    \end{itemize}
+    \vspace{2pt}\dotfill\vspace{2pt}
+    \textbf{2. Atalya Solutions Pvt. Ltd.} \hfill \textit{\footnotesize Flutter Development Trainee}\\
+    \begin{itemize}
+        \item Designed responsive mobile app screens with Google Material Design and integrated REST APIs with state management.
+    \end{itemize}
+
+    \vspace{6pt}
+    \textbf{\color{primaryblack}\large TECHNICAL EVENTS \& LEADERSHIP}
+    \vspace{2pt}\hrule height 1pt\vspace{3pt}
+    \begin{itemize}
+        \item \textbf{Presentation:} Presented \textit{"Neural Link in Human Brain"} at NETRIX 2024--2025, KPR Institute of Engg. \& Tech.
+        \item \textbf{Project Team Lead:} Coordinated 4-member student teams for hackathons, managing GitHub repos and sprint deliverables.
+    \end{itemize}
+\end{minipage}
+\end{tabularx}
+
+\end{mdframed}
+\end{document}

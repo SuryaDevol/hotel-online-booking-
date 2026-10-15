@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Upload, Image, AlertCircle, Info, Sparkles, Trash2 } from 'lucide-react';
+import { X, Upload, Image, AlertCircle, Info, Sparkles, Trash2, Compass } from 'lucide-react';
 
 const PRESET_SAMPLE_IMAGES = [
   { label: 'Luxury Resort', url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80' },
@@ -133,6 +133,24 @@ export default function HotelForm({ isOpen, onClose, onSubmit, initialData = nul
     setImageUploadError('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
+    }
+  };
+
+  const handleDetectLocation = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setFormData((prev) => ({
+            ...prev,
+            latitude: pos.coords.latitude.toFixed(4),
+            longitude: pos.coords.longitude.toFixed(4),
+          }));
+          setErrors((prev) => ({ ...prev, latitude: '', longitude: '' }));
+        },
+        (err) => {
+          console.warn('Geolocation detection error:', err.message);
+        }
+      );
     }
   };
 
@@ -343,9 +361,19 @@ export default function HotelForm({ isOpen, onClose, onSubmit, initialData = nul
 
             {/* Coordinates Section */}
             <div className="form-fieldset">
-              <div className="fieldset-header">
-                <span className="fieldset-title">Geographic Coordinates (Optional)</span>
-                <span className="fieldset-hint">Used for map pins (-90 to 90 lat, -180 to 180 lng)</span>
+              <div className="fieldset-header fieldset-header-between">
+                <div>
+                  <span className="fieldset-title">Geographic Coordinates (Optional)</span>
+                  <span className="fieldset-hint">Used for map pins (-90 to 90 lat, -180 to 180 lng)</span>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-sm btn-ghost btn-detect-loc"
+                  onClick={handleDetectLocation}
+                  title="Detect GPS coordinates using browser location"
+                >
+                  <Compass size={14} /> Auto-Detect GPS
+                </button>
               </div>
               <div className="form-row">
                 <div className="form-group flex-1">

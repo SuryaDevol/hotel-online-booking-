@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeyasurya G - Professional Software Engineering Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Page Setup */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #000000;
+      --heading: #000000;
+      --text: #1f2937;
+      --subtext: #4b5563;
+      --border: #000000;
+      --badge-bg: #000000;
+      --badge-fg: #ffffff;
+      --tag: #1f2937;
+      --dotted: #9ca3af;
+    }
+
+    body.navy-theme {
+      --primary: #12284c;
+      --heading: #12284c;
+      --text: #1e293b;
+      --subtext: #334155;
+      --border: #16365c;
+      --badge-bg: #12284c;
+      --badge-fg: #ffffff;
+      --tag: #1d4ed8;
+      --dotted: #94a3b8;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f3f4f6;
+      color: var(--text);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      padding: 20px 0;
+    }
+
+    /* Floating Toolbar */
+    .toolbar {
+      max-width: 820px;
+      margin: 0 auto 14px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111827;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .toolbar h3 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      background: #000000;
+      color: #ffffff;
+      border: 1px solid #4b5563;
+      padding: 7px 15px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+    .btn-secondary {
+      background: #1f2937;
+      border: 1px solid #374151;
+      color: #e5e7eb;
+    }
+    .btn-secondary:hover {
+      background: #374151;
+      color: #ffffff;
+    }
+
+    /* Resume Document Container */
+    .resume-page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 10mm 12mm 10mm 12mm;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+
+    /* Outer Frame matching template */
+    .resume-frame {
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      padding: 15px 17px;
+      min-height: 100%;
+    }
+
+    /* Header Section (Symmetric Grid Alignment) */
+    .header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .header-name {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    .header-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--subtext);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .header-divider {
+      width: 100%;
+      height: 1.5px;
+      background-color: var(--border);
+      margin: 0 auto 7px auto;
+    }
+
+    /* Perfect Centered Contact Grid */
+    .contact-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3.5px;
+      font-size: 10.5px;
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      width: 100%;
+      max-width: 460px;
+    }
+    .contact-left {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      padding-right: 14px;
+    }
+    .contact-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      padding-left: 14px;
+    }
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--heading);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-item:hover {
+      text-decoration: underline;
+    }
+    .contact-sep {
+      color: var(--dotted);
+      font-weight: 400;
+      user-select: none;
+    }
+    .contact-icon {
+      width: 12.5px;
+      height: 12.5px;
+      color: var(--heading);
+      flex-shrink: 0;
+    }
+
+    .main-divider {
+      width: 100%;
+      height: 1.5px;
+      background-color: var(--border);
+      margin: 8px 0 11px 0;
+    }
+
+    /* Layout: 2 Columns with Equal Margin from Vertical Border */
+    .columns-container {
+      display: grid;
+      grid-template-columns: 32.5% 67.5%;
+    }
+    .left-column {
+      border-right: 1.5px solid var(--border);
+      padding-right: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .right-column {
+      padding-left: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 6px;
+      padding-bottom: 3.5px;
+      border-bottom: 1.5px solid var(--border);
+    }
+    .icon-badge {
+      width: 19px;
+      height: 19px;
+      background-color: var(--badge-bg);
+      color: var(--badge-fg);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-badge svg {
+      width: 11px;
+      height: 11px;
+      fill: currentColor;
+      display: block;
+    }
+    .section-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* Content Typography */
+    .item-group {
+      margin-bottom: 5px;
+    }
+    .item-group:last-child {
+      margin-bottom: 0;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+    .item-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--heading);
+      letter-spacing: 0.1px;
+    }
+    .item-subtitle {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--subtext);
+      margin-bottom: 2px;
+    }
+    .item-meta {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--tag);
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+    .tech-tag {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--tag);
+      text-align: right;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    .dotted-sep {
+      border-top: 1px dotted var(--dotted);
+      margin: 6px 0;
+    }
+
+    /* Bullet Points (Strictly Left-Aligned for Crisp Typography) */
+    ul.bullet-list {
+      list-style-type: disc;
+      padding-left: 14px;
+      margin: 0;
+    }
+    ul.bullet-list li {
+      font-size: 9.6px;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 2px;
+      text-align: left;
+    }
+    ul.bullet-list li:last-child {
+      margin-bottom: 0;
+    }
+    ul.bullet-list li strong {
+      color: #000000;
+      font-weight: 700;
+    }
+
+    /* Skill Categories */
+    .skill-block {
+      margin-bottom: 5px;
+    }
+    .skill-block:last-child {
+      margin-bottom: 0;
+    }
+    .skill-category {
+      font-size: 9.8px;
+      font-weight: 800;
+      color: var(--heading);
+      margin-bottom: 1px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .skill-names {
+      font-size: 9.5px;
+      color: var(--subtext);
+      line-height: 1.32;
+      text-align: left;
+    }
+
+    /* Short HR Summary */
+    .summary-text {
+      font-size: 9.8px;
+      color: var(--text);
+      line-height: 1.42;
+      text-align: left;
+    }
+    .summary-text strong {
+      color: #000000;
+      font-weight: 700;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background-color: #ffffff;
+        padding: 0;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .resume-page {
+        width: 100% !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+      .resume-frame {
+        border: 1.8px solid #000000 !important;
+        padding: 13px 15px !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 6mm 5mm 6mm 5mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print Toolbar -->
+  <div class="toolbar no-print">
+    <div>
+      <h3>Jeyasurya G — Professional Software Engineering Resume</h3>
+      <span style="font-size: 12px; color: #9ca3af;">Neat Alignment Edition • Symmetric Grid • Pure B&W Print Ready</span>
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn btn-secondary" onclick="toggleTheme()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span id="themeBtnText">Switch to Navy Blue</span>
+      </button>
+      <button class="btn" onclick="window.print()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Resume Document Page -->
+  <div class="resume-page">
+    <div class="resume-frame">
+
+      <!-- Header Section -->
+      <header class="header">
+        <h1 class="header-name">JEYASURYA G</h1>
+        <div class="header-title">COMPUTER SCIENCE ENGINEERING STUDENT</div>
+        <div class="header-divider"></div>
+        <div class="contact-grid">
+          <div class="contact-row">
+            <div class="contact-left">
+              <a class="contact-item" href="mailto:suryacloudcamp@gmail.com">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                suryacloudcamp@gmail.com
+              </a>
+            </div>
+            <span class="contact-sep">|</span>
+            <div class="contact-right">
+              <a class="contact-item" href="tel:+916379491821">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                +91 6379491821
+              </a>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-left">
+              <a class="contact-item" href="https://github.com/SuryaDevod" target="_blank" rel="noopener">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+                github.com/SuryaDevod
+              </a>
+            </div>
+            <span class="contact-sep">|</span>
+            <div class="contact-right">
+              <a class="contact-item" href="https://linkedin.com/in/jeyasurya-g" target="_blank" rel="noopener">
+                <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                linkedin.com/in/jeyasurya-g
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Body: Two Columns with Equal Padding from Border -->
+      <div class="columns-container">
+
+        <!-- ==================== LEFT COLUMN ==================== -->
+        <div class="left-column">
+
+          <!-- EDUCATION -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+              </div>
+              <h2 class="section-title">EDUCATION</h2>
+            </div>
+
+            <div class="item-group">
+              <div class="item-title">Jai Shriram Engineering College</div>
+              <div class="item-subtitle">B.E. Computer Science and Engineering</div>
+              <ul class="bullet-list">
+                <li><strong>CGPA: 7.86 / 10</strong></li>
+                <li><strong>Expected Graduation: 2027</strong></li>
+                <li>Key Areas: Data Structures, OOP (Java), DBMS.</li>
+              </ul>
+            </div>
+
+            <div class="dotted-sep"></div>
+
+            <div class="item-group">
+              <div class="item-title">SDA Matriculation Hr. Sec. School</div>
+              <ul class="bullet-list" style="margin-top: 2px;">
+                <li><strong>HSC (Class XII): 80%</strong> (2023)</li>
+                <li><strong>SSLC (Class X): Completed</strong> (2021)</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- TECHNICAL SKILLS (MAJOR SKILLS ONLY) -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+              </div>
+              <h2 class="section-title">TECHNICAL SKILLS</h2>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">Programming Languages</div>
+              <div class="skill-names">Python, Java, JavaScript (ES6+), SQL</div>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">Frontend & Web</div>
+              <div class="skill-names">React.js, Redux Toolkit, HTML5, CSS3, REST APIs</div>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">AI & Computer Vision</div>
+              <div class="skill-names">OpenCV, YOLOv8, Image Processing</div>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">Databases & Backend</div>
+              <div class="skill-names">MySQL, Relational Databases (RDBMS)</div>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">Tools & Testing</div>
+              <div class="skill-names">Git, GitHub, VS Code, Vitest, Postman</div>
+            </div>
+
+            <div class="skill-block">
+              <div class="skill-category">Core Concepts</div>
+              <div class="skill-names">Data Structures & Algorithms (DSA), OOP</div>
+            </div>
+          </section>
+
+          <!-- CERTIFICATIONS -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+              </div>
+              <h2 class="section-title">CERTIFICATIONS</h2>
+            </div>
+
+            <ul class="bullet-list">
+              <li><strong>Python Programming Training</strong> – Brainery Spot</li>
+              <li><strong>Flutter UI Development</strong> – Atalya Solutions</li>
+              <li><strong>Artificial Intelligence Fundamentals</strong></li>
+              <li><strong>Database & SQL Fundamentals</strong></li>
+            </ul>
+          </section>
+
+          <!-- ACHIEVEMENTS -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H7v2h10v-2h-4v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg>
+              </div>
+              <h2 class="section-title">ACHIEVEMENTS</h2>
+            </div>
+
+            <ul class="bullet-list">
+              <li><strong>1st Place Winner – NOVA 2K25 Project Expo:</strong> Awarded among 50+ college teams for AI surveillance.</li>
+              <li><strong>Best Project Award – Guardian Union:</strong> Won for <em>"Detect the Unseen"</em> real-time object detection.</li>
+              <li><strong>Faculty Innovation Recognition:</strong> Commended for practical software development and innovation.</li>
+            </ul>
+          </section>
+
+        </div>
+
+        <!-- ==================== RIGHT COLUMN ==================== -->
+        <div class="right-column">
+
+          <!-- SHORT 2-LINE PROFESSIONAL SUMMARY -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <h2 class="section-title">PROFESSIONAL SUMMARY</h2>
+            </div>
+            <p class="summary-text">
+              Computer Science Engineering student (Batch of 2027) skilled in <strong>Java, Python, React.js, and SQL</strong>. Passionate about building full-stack web applications, secure database systems, and practical computer vision models.
+            </p>
+          </section>
+
+          <!-- 4 PROJECTS (EXACTLY 2 SIMPLE BULLET POINTS EACH) -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
+              </div>
+              <h2 class="section-title">PROJECTS</h2>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">1. ShieldBank – Secure Banking System</span>
+                <span class="tech-tag">(Java, MySQL)</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed a desktop banking application with secure user login, account management, and real-time fund transfers.</li>
+                <li>Implemented <strong>AES data encryption</strong> and <strong>ACID-compliant SQL transactions</strong> to protect user credentials and ensure 100% accurate transfers.</li>
+              </ul>
+            </div>
+
+            <div class="dotted-sep"></div>
+
+            <!-- Project 2 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">2. GrandStay – Hotel Management Dashboard</span>
+                <span class="tech-tag">(React.js, Redux, Vite)</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Built a responsive web dashboard for hotel management featuring live search, multi-criteria filtering by city/price, and dynamic pagination.</li>
+                <li>Integrated interactive <strong>Leaflet OpenStreetMap</strong> for property location tracking and automated unit testing with <strong>Vitest</strong>.</li>
+              </ul>
+            </div>
+
+            <div class="dotted-sep"></div>
+
+            <!-- Project 3 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">3. Classroom Surveillance System</span>
+                <span class="tech-tag">(Python, YOLOv8, OpenCV)</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Engineered an AI surveillance system using <strong>YOLOv8</strong> and <strong>OpenCV</strong> to detect unauthorized electronic devices (phones, earphones) from live video feeds.</li>
+                <li>Optimized video streaming to achieve <strong>30+ FPS real-time processing</strong>, winning <strong>1st Place at the NOVA 2K25 Project Expo</strong>.</li>
+              </ul>
+            </div>
+
+            <div class="dotted-sep"></div>
+
+            <!-- Project 4 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">4. LegalScanAI – Product Defect Reporting</span>
+                <span class="tech-tag">(Python, OpenCV)</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed an automated inspection tool that analyzes product images to detect manufacturing cracks, defects, and packaging issues.</li>
+                <li>Implemented automated PDF report generation and secure email notification to route verified grievance reports to inspection teams.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- INTERNSHIPS & TRAINING (EXACTLY 1 CRISP LINE EACH) -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+              </div>
+              <h2 class="section-title">INTERNSHIPS & TRAINING</h2>
+            </div>
+
+            <!-- Internship 1 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">1. Brainery Spot Technology</span>
+                <span class="item-meta">Python Developer Intern</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Developed modular Python data automation scripts and solved 50+ DSA algorithmic programming benchmarks.</li>
+              </ul>
+            </div>
+
+            <div class="dotted-sep"></div>
+
+            <!-- Internship 2 -->
+            <div class="item-group">
+              <div class="item-header">
+                <span class="item-title">2. Atalya Solutions Pvt. Ltd.</span>
+                <span class="item-meta">Flutter Development Trainee</span>
+              </div>
+              <ul class="bullet-list">
+                <li>Designed responsive mobile app screens with Google Material Design and integrated REST APIs with state management.</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- TECHNICAL EVENTS & PARTICIPATION -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+              <h2 class="section-title">TECHNICAL EVENTS & PARTICIPATION</h2>
+            </div>
+            <ul class="bullet-list">
+              <li>Presented <em>"Neural Link in Human Brain"</em> at <strong>NETRIX 2024–2025</strong>, KPR Institute of Engineering and Technology.</li>
+              <li>Demonstrated live AI surveillance prototypes to industry evaluators at <strong>NOVA Project Expo</strong>.</li>
+            </ul>
+          </section>
+
+          <!-- LEADERSHIP & EXTRACURRICULAR ACTIVITIES -->
+          <section>
+            <div class="section-header">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+              </div>
+              <h2 class="section-title">LEADERSHIP & EXTRACURRICULAR ACTIVITIES</h2>
+            </div>
+            <ul class="bullet-list">
+              <li><strong>Project Team Lead:</strong> Coordinated 4-member student teams for hackathons, managing GitHub repos and sprint deliverables.</li>
+              <li><strong>Technical Club Participant:</strong> Active participant in college programming workshops, assisting peers in Python and Git workflows.</li>
+            </ul>
+          </section>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const btnText = document.getElementById('themeBtnText');
+      if (body.classList.contains('navy-theme')) {
+        body.classList.remove('navy-theme');
+        btnText.textContent = 'Switch to Navy Blue';
+      } else {
+        body.classList.add('navy-theme');
+        btnText.textContent = 'Switch to Black & White';
+      }
+    }
+  </script>
+
+</body>
+</html>

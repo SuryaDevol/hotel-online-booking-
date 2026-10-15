@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
-import { MapPin, Star, Edit3, Trash2, Globe, ImageOff } from 'lucide-react';
+import { MapPin, Star, Edit3, Trash2, Globe, ImageOff, Heart, CreditCard, Compass } from 'lucide-react';
+import { formatDistance } from '../utils/geo';
 
 /**
  * HotelItem Component
- * Renders an individual hotel card in the grid view with entrance animation
- * and price formatted in Indian Rupees (₹ INR).
+ * Renders an individual hotel card in the grid view.
+ * Features:
+ * - Direct "Book Now" CTA with Payment Gateway flow
+ * - Live GPS Distance badge from user's location
+ * - Interactive Wishlist / Favorite toggle
+ * - Prices formatted in Indian Rupees (₹ INR)
  */
-export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMap }) {
+export default function HotelItem({
+  hotel,
+  index = 0,
+  distanceKm = null,
+  onEdit,
+  onDelete,
+  onViewMap,
+  onBook,
+  onToggleFavorite,
+}) {
   const [imageError, setImageError] = useState(false);
 
   const hasCoordinates =
@@ -16,6 +30,7 @@ export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMa
     hotel.longitude !== undefined;
 
   const formattedPrice = Number(hotel.price).toLocaleString('en-IN');
+  const distanceFormatted = formatDistance(distanceKm);
 
   return (
     <article
@@ -46,12 +61,27 @@ export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMa
             <span className="price-amount">{formattedPrice}</span>
             <span className="price-period">/ night</span>
           </div>
-          {hotel.rating && (
-            <div className="rating-tag">
-              <Star size={13} className="star-icon" fill="currentColor" />
-              <span>{hotel.rating}</span>
-            </div>
-          )}
+
+          <div className="card-overlay-actions">
+            {hotel.rating && (
+              <div className="rating-tag">
+                <Star size={13} className="star-icon" fill="currentColor" />
+                <span>{hotel.rating}</span>
+              </div>
+            )}
+            <button
+              type="button"
+              className={`favorite-btn ${hotel.isFavorite ? 'favorited' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onToggleFavorite) onToggleFavorite(hotel.id);
+              }}
+              title={hotel.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              aria-label={`Favorite ${hotel.name}`}
+            >
+              <Heart size={15} fill={hotel.isFavorite ? 'currentColor' : 'none'} />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -61,9 +91,16 @@ export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMa
           <h3 id={`hotel-title-${hotel.id}`} className="hotel-name">
             {hotel.name}
           </h3>
-          <div className="hotel-location">
-            <MapPin size={15} className="location-pin-icon" />
-            <span>{hotel.location}</span>
+          <div className="hotel-location-row">
+            <div className="hotel-location">
+              <MapPin size={15} className="location-pin-icon" />
+              <span>{hotel.location}</span>
+            </div>
+            {distanceFormatted && (
+              <span className="hotel-distance-pill">
+                <Compass size={12} /> {distanceFormatted}
+              </span>
+            )}
           </div>
         </div>
 
@@ -93,7 +130,20 @@ export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMa
           )}
         </div>
 
-        {/* Card Actions Footer */}
+        {/* Primary Booking CTA */}
+        <div className="hotel-booking-cta-row">
+          <button
+            type="button"
+            className="btn btn-primary btn-full btn-book-now"
+            onClick={() => onBook && onBook(hotel)}
+            aria-label={`Book stay at ${hotel.name}`}
+          >
+            <CreditCard size={15} />
+            <span>Book Now</span>
+          </button>
+        </div>
+
+        {/* Card Admin Actions Footer */}
         <div className="hotel-card-footer">
           {hasCoordinates && (
             <button
