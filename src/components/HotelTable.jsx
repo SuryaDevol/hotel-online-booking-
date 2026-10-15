@@ -28,11 +28,12 @@ function TableThumbnail({ src, alt }) {
 
 /**
  * HotelTable Component
- * Renders hotel records in an administrative tabular layout.
+ * Renders hotel records in an administrative tabular layout with Indian Rupee (₹ INR) formatting
+ * and smooth row entry animations.
  */
 export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
   return (
-    <div className="table-responsive-wrapper">
+    <div className="table-responsive-wrapper animated-fade">
       <table className="hotel-data-table">
         <thead>
           <tr>
@@ -46,7 +47,7 @@ export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
           </tr>
         </thead>
         <tbody>
-          {hotels.map((hotel) => {
+          {hotels.map((hotel, index) => {
             const hasCoordinates =
               hotel.latitude !== null &&
               hotel.latitude !== undefined &&
@@ -54,7 +55,11 @@ export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
               hotel.longitude !== undefined;
 
             return (
-              <tr key={hotel.id} className="table-row">
+              <tr
+                key={hotel.id}
+                className="table-row animated-row"
+                style={{ animationDelay: `${index * 45}ms` }}
+              >
                 <td>
                   <TableThumbnail src={hotel.image} alt={hotel.name} />
                 </td>
@@ -71,7 +76,9 @@ export default function HotelTable({ hotels, onEdit, onDelete, onViewMap }) {
                   </div>
                 </td>
                 <td>
-                  <span className="table-price-badge">${hotel.price}</span>
+                  <span className="table-price-badge">
+                    ₹{Number(hotel.price).toLocaleString('en-IN')}
+                  </span>
                 </td>
                 <td>
                   {hasCoordinates ? (

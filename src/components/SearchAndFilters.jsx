@@ -105,8 +105,8 @@ export default function SearchAndFilters({
             onChange={(e) => onSortChange(e.target.value)}
           >
             <option value="default">Default Order</option>
-            <option value="price-asc">Price: Low to High ($ &rarr; $$$)</option>
-            <option value="price-desc">Price: High to Low ($$$ &rarr; $)</option>
+            <option value="price-asc">Price: Low to High (₹ &rarr; ₹₹₹)</option>
+            <option value="price-desc">Price: High to Low (₹₹₹ &rarr; ₹)</option>
             <option value="name-asc">Hotel Name: A &rarr; Z</option>
             <option value="name-desc">Hotel Name: Z &rarr; A</option>
           </select>

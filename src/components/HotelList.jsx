@@ -69,10 +69,11 @@ export default function HotelList({
     <section className="hotel-list-section" aria-label="Hotel list">
       {viewMode === 'grid' ? (
         <div className="hotels-grid">
-          {hotels.map((hotel) => (
+          {hotels.map((hotel, index) => (
             <HotelItem
               key={hotel.id}
               hotel={hotel}
+              index={index}
               onEdit={onEdit}
               onDelete={onDelete}
               onViewMap={onViewMap}

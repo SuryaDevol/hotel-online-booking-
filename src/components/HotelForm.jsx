@@ -158,7 +158,7 @@ export default function HotelForm({ isOpen, onClose, onSubmit, initialData = nul
     } else {
       const priceNum = Number(formData.price);
       if (isNaN(priceNum) || priceNum <= 0) {
-        newErrors.price = 'Please enter a valid price greater than $0.';
+        newErrors.price = 'Please enter a valid price greater than ₹0.';
       }
     }
 
@@ -296,7 +296,7 @@ export default function HotelForm({ isOpen, onClose, onSubmit, initialData = nul
             <div className="form-row">
               <div className="form-group flex-1">
                 <label htmlFor="form-hotel-price" className="form-label required">
-                  Price Per Night ($ USD)
+                  Price Per Night (₹ INR)
                 </label>
                 <input
                   id="form-hotel-price"
@@ -305,7 +305,7 @@ export default function HotelForm({ isOpen, onClose, onSubmit, initialData = nul
                   min="1"
                   step="1"
                   className={`form-input ${errors.price ? 'is-invalid' : ''}`}
-                  placeholder="e.g., 295"
+                  placeholder="e.g., 18500"
                   value={formData.price}
                   onChange={handleChange}
                   required

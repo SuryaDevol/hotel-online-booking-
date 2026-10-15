@@ -1,9 +1,10 @@
 import React from 'react';
-import { Building2, DollarSign, MapPin, TrendingUp } from 'lucide-react';
+import { Building2, MapPin, TrendingUp, IndianRupee } from 'lucide-react';
 
 /**
  * StatsOverview Component
  * Computes high-level KPI metrics from current Redux hotel state.
+ * Prices denominated in Indian Rupees (₹ INR) with localized formatting.
  */
 export default function StatsOverview({ hotels }) {
   const totalHotels = hotels.length;
@@ -28,7 +29,7 @@ export default function StatsOverview({ hotels }) {
 
   return (
     <section className="stats-grid" aria-label="Key Performance Indicators">
-      <div className="stat-card">
+      <div className="stat-card" style={{ animationDelay: '50ms' }}>
         <div className="stat-icon-wrap stat-blue">
           <Building2 size={22} />
         </div>
@@ -39,18 +40,18 @@ export default function StatsOverview({ hotels }) {
         </div>
       </div>
 
-      <div className="stat-card">
+      <div className="stat-card" style={{ animationDelay: '100ms' }}>
         <div className="stat-icon-wrap stat-emerald">
-          <DollarSign size={22} />
+          {IndianRupee ? <IndianRupee size={22} /> : <span style={{ fontSize: '1.25rem', fontWeight: 800 }}>₹</span>}
         </div>
         <div className="stat-content">
           <span className="stat-label">Average Nightly Rate</span>
-          <span className="stat-value">${avgPrice}</span>
+          <span className="stat-value">₹{avgPrice.toLocaleString('en-IN')}</span>
           <span className="stat-meta">Across all locations</span>
         </div>
       </div>
 
-      <div className="stat-card">
+      <div className="stat-card" style={{ animationDelay: '150ms' }}>
         <div className="stat-icon-wrap stat-violet">
           <MapPin size={22} />
         </div>
@@ -61,14 +62,14 @@ export default function StatsOverview({ hotels }) {
         </div>
       </div>
 
-      <div className="stat-card">
+      <div className="stat-card" style={{ animationDelay: '200ms' }}>
         <div className="stat-icon-wrap stat-amber">
           <TrendingUp size={22} />
         </div>
         <div className="stat-content">
           <span className="stat-label">Price Range</span>
           <span className="stat-value">
-            {totalHotels > 0 ? `$${minPrice} – $${maxPrice}` : 'N/A'}
+            {totalHotels > 0 ? `₹${minPrice.toLocaleString('en-IN')} – ₹${maxPrice.toLocaleString('en-IN')}` : 'N/A'}
           </span>
           <span className="stat-meta">Min to Max per night</span>
         </div>

@@ -3,9 +3,10 @@ import { MapPin, Star, Edit3, Trash2, Globe, ImageOff } from 'lucide-react';
 
 /**
  * HotelItem Component
- * Renders an individual hotel card in the grid view.
+ * Renders an individual hotel card in the grid view with entrance animation
+ * and price formatted in Indian Rupees (₹ INR).
  */
-export default function HotelItem({ hotel, onEdit, onDelete, onViewMap }) {
+export default function HotelItem({ hotel, index = 0, onEdit, onDelete, onViewMap }) {
   const [imageError, setImageError] = useState(false);
 
   const hasCoordinates =
@@ -14,8 +15,14 @@ export default function HotelItem({ hotel, onEdit, onDelete, onViewMap }) {
     hotel.longitude !== null &&
     hotel.longitude !== undefined;
 
+  const formattedPrice = Number(hotel.price).toLocaleString('en-IN');
+
   return (
-    <article className="hotel-card" aria-labelledby={`hotel-title-${hotel.id}`}>
+    <article
+      className="hotel-card animated-card"
+      style={{ animationDelay: `${index * 75}ms` }}
+      aria-labelledby={`hotel-title-${hotel.id}`}
+    >
       {/* Thumbnail Section */}
       <div className="hotel-card-media">
         {hotel.image && !imageError ? (
@@ -35,7 +42,8 @@ export default function HotelItem({ hotel, onEdit, onDelete, onViewMap }) {
 
         <div className="card-media-overlay">
           <div className="price-tag">
-            <span className="price-amount">${hotel.price}</span>
+            <span className="price-currency">₹</span>
+            <span className="price-amount">{formattedPrice}</span>
             <span className="price-period">/ night</span>
           </div>
           {hotel.rating && (

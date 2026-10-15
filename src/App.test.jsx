@@ -29,7 +29,7 @@ describe('App Integration Tests', () => {
 
     expect(screen.getByText('GrandStay')).toBeInTheDocument();
     expect(screen.getByText('Total Properties')).toBeInTheDocument();
-    expect(screen.getByText('The Grand Elysée Hotel')).toBeInTheDocument();
+    expect(screen.getByText('The Taj Mahal Palace')).toBeInTheDocument();
   });
 
   it('filters hotels by search query', () => {
@@ -39,7 +39,7 @@ describe('App Integration Tests', () => {
     fireEvent.change(searchInput, { target: { value: 'Tokyo' } });
 
     expect(screen.getByText('Sakura Bay Palace')).toBeInTheDocument();
-    expect(screen.queryByText('The Grand Elysée Hotel')).not.toBeInTheDocument();
+    expect(screen.queryByText('The Taj Mahal Palace')).not.toBeInTheDocument();
   });
 
   it('filters hotels by location dropdown', () => {
@@ -49,7 +49,7 @@ describe('App Integration Tests', () => {
     fireEvent.change(locationSelect, { target: { value: 'Paris, France' } });
 
     expect(screen.getByText('The Grand Elysée Hotel')).toBeInTheDocument();
-    expect(screen.queryByText('Sakura Bay Palace')).not.toBeInTheDocument();
+    expect(screen.queryByText('The Taj Mahal Palace')).not.toBeInTheDocument();
   });
 
   it('allows adding a new hotel through modal form', () => {
